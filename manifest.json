@@ -1,0 +1,31 @@
+{
+    "author": "Clickbait Checker Team",
+    "browser_action": {
+        // "default_icon": "images/icon.png",
+        // "default_popup": "popup/popup.html",
+        "default_title": "Clickbait Checker"
+    },
+    "content_scripts": [{
+        "matches": ["https://*.facebook.com/*"],
+        "js": ["scripts/jquery.js", "scripts/cbc.js"],
+        "css": ["assets/styles/cbc.css"]
+    }],
+    "description": "Check Facebook for clickbait",
+    // "default_locale": "en",
+    "manifest_version": 2,
+    "name": "Clickbait Checker",
+    "permissions": [
+        // "https://*.stopclickbait.com/*",
+        "https://*.facebook.com/*"
+        // "storage"
+    ],
+    "version": "0.1",
+    "web_accessible_resources": [
+        // "scb-container/SCB-Container.html",
+        "scripts/jquery.js",
+        "scripts/cbc.js"
+        // "scripts/jScrollPane.js",
+        // "scripts/mouseWheel.js",
+        // "images/loading.gif"
+    ]
+}
