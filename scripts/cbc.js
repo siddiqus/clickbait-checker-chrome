@@ -29,6 +29,28 @@ $(document).ready(function() {
     var _getClickbaitPopupId = function(count) {
         return 'clickbaitPopup_' + count;
     };
+    var _getClickbaitWrapperId = function(count) {
+        return 'clickbaitMarkerWrapper_' + count;
+    };
+
+    var _getClickbaitInfoElement = function(data, id) {
+        var element = $("<div class='clickbait-marker-info-wrapper'></div>");
+        element.attr('id', _getClickbaitPopupId(id));
+
+        var str = '';
+        if (data.matched_ngram && data.matched_ngram.length > 0) {
+            str += '<b>matched_ngram:</b>&nbsp;' + data.matched_ngram + "<br/>";
+        }
+
+        str += '<b>similarity:</b>&nbsp;' + data.similarity + "<br/>" + "<hr/>" +
+            '<b>summary:</b><br/>' + data.summary;
+
+        var info = $('<div></div>').html(str);
+        element.append(info);
+
+        return element;
+    }
+
     // Function to append the circle checkmark or cross for a specific node
     var _handleClickbaitApiSuccess = function(result, node) {
         clickbaitCount = clickbaitCount + 1;
@@ -39,16 +61,31 @@ $(document).ready(function() {
 
         if (isClickbait) {
             clickbaitMarker.addClass('clickbait-marker-is-clickbait');
-            clickbaitMarker.text('Potential Clickbait! - Read more');
+            clickbaitMarker.text('Potential Clickbait! - Hover here to read more');
         } else {
             clickbaitMarker.addClass('clickbait-marker-not-clickbait');
             clickbaitMarker.text('Not Clickbait');
         }
-        clickbaitMarker.wrap("<div class='_59tj _2iau'></div>");
-        node.before(clickbaitMarker);
+
+        var clickbaitMarkerWrapper = $("<div class='clickbait-marker-wrapper'></div>");
+        clickbaitMarkerWrapper.attr('id', _getClickbaitWrapperId(clickbaitCount));
+        clickbaitMarkerWrapper.append(clickbaitMarker);
+
+        var infoElement = _getClickbaitInfoElement(result, clickbaitCount);
+
+        var closeButton = $("<div class='clickbait-marker-info-close-btn'>Close</div>");
+        infoElement.append(closeButton);
+
+        closeButton.click(function(e) {
+            infoElement.hide();
+        });
+
+        infoElement.hide();
+        clickbaitMarkerWrapper.append(infoElement);
+        node.before(clickbaitMarkerWrapper);
 
         clickbaitMarker.hover(function(e) {
-            console.log(e.target);
+            infoElement.show();
         });
     };
 

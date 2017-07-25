@@ -4,6 +4,7 @@
     line-height: 2em;
     color: white !important;
     margin-top: 0.5em;
+    cursor: pointer;
 }
 
 .clickbait-marker-is-clickbait {
@@ -13,6 +14,32 @@
 .clickbait-marker-not-clickbait {
     background-color: #4caf50;
 }
+
+.clickbait-marker-wrapper {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.clickbait-marker-info-close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+}
+
+.clickbait-marker-info-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 5000;
+    margin-top: 2em;
+    padding: 40px 30px;
+    color: white;
+}
+
+.clickbait-marker-info {}
 
 .clickbait-checker-checked-symbol {
     color: white;
