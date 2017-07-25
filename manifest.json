@@ -23,9 +23,8 @@
     "web_accessible_resources": [
         // "scb-container/SCB-Container.html",
         "scripts/jquery.js",
-        "scripts/cbc.js"
-        // "scripts/jScrollPane.js",
-        // "scripts/mouseWheel.js",
-        // "images/loading.gif"
+        "scripts/cbc.js",
+        "assets/images/like-icon.png",
+        "assets/images/dislike-icon.png"
     ]
 }

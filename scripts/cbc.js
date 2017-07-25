@@ -14,8 +14,7 @@ $(document).ready(function() {
     var checked_link_tag_not_clickbait = 'checked_link_tag_not_clickbait';
     var clickbaitCount = 0;
 
-    var facebook_like_icon_class = '_4x9- _4x9_ _48-k font-white clickbait-checker-feedback-button';
-    var facebook_dislike_icon_class = '_4x9- _4x9_ _48-k font-white dislike-button-flipped clickbait-checker-feedback-button';
+    var clickbait_feedback_button_class = 'clickbait-checker-feedback-button';
 
     var dummyData = {
         "data": {
@@ -58,11 +57,17 @@ $(document).ready(function() {
 
         var info = $('<div></div>').html(str);
 
-        var likeButton = $('<a></a>').addClass(facebook_like_icon_class);
+        var likeButton = $('<a></a>').addClass(clickbait_feedback_button_class);
         likeButton.attr('clickbaitId', id)
+        var likeIconUrl = chrome.extension.getURL("/assets/images/like-icon.png");
+        var likeButtonImage = "<img src='" + likeIconUrl + "'/>"
+        likeButton.append(likeButtonImage);
 
-        var dislikeButton = $('<a></a>').addClass(facebook_dislike_icon_class);
+        var dislikeButton = $('<a></a>').addClass(clickbait_feedback_button_class);
         dislikeButton.attr('clickbaitId', id);
+        var dislikeIconUrl = chrome.extension.getURL("/assets/images/dislike-icon.png");
+        var dislikeButtonImage = "<img src='" + dislikeIconUrl + "'/>"
+        dislikeButton.append(dislikeButtonImage);
 
         likeButton.click(function(e) {
             _handleLikeButtonClick(postData);
