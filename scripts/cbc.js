@@ -58,25 +58,25 @@ $(document).ready(function() {
 
         var info = $('<div></div>').html(str);
 
-        var likeIcon = $('<span></span>').addClass(facebook_like_icon_class);
-        var dislikeIcon = $('<span></span>').addClass(facebook_dislike_icon_class);
+        var likeButton = $('<a></a>').addClass(facebook_like_icon_class);
+        likeButton.attr('clickbaitId', id)
 
-        var likeButton = $('<a></a>').attr('clickbaitId', id);
-        likeButton.html(likeIcon);
+        var dislikeButton = $('<a></a>').addClass(facebook_dislike_icon_class);
+        dislikeButton.attr('clickbaitId', id);
 
         likeButton.click(function(e) {
             _handleLikeButtonClick(postData);
-        })
-
-        var dislikeButton = $('<a></a>').attr('clickbaitId', id);
-        dislikeButton.html(dislikeIcon);
+        });
 
         dislikeButton.click(function(e) {
             _handleDislikeButtonClick(postData);
-        })
+        });
 
-        var likeDislikeButtons = $("<hr/><span> Provide Feedback: &nbsp;&nbsp;&nbsp; </span>").append(likeButton).append(dislikeButton);
+        var likeDislikeButtons = $("<span> Provide Feedback: &nbsp;&nbsp; </span>");
+        likeDislikeButtons.append(likeButton)
+        likeDislikeButtons.append(dislikeButton);
 
+        info.append('<hr/>');
         info.append(likeDislikeButtons);
         element.append(info);
 

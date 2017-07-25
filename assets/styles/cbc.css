@@ -32,8 +32,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.85);
-    z-index: 5000;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1;
     margin-top: 2em;
     padding: 40px 30px;
     color: white;
@@ -65,12 +65,6 @@
 }
 
 .dislike-button-flipped {
-    /* -moz-transform: scaleY(-1);
-    -o-transform: scaleY(-1);
-    -webkit-transform: scaleY(-1);
-    transform: scaleY(-1);
-    filter: FlipY;
-    -ms-filter: "FlipY"; */
     -moz-transform: scale(1, -1);
     -webkit-transform: scale(1, -1);
     -o-transform: scale(1, -1);
