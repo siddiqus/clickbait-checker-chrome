@@ -77,9 +77,9 @@ $(document).ready(function() {
             _handleDislikeButtonClick(postData);
         });
 
-        var likeDislikeButtons = $("<span> Provide Feedback: &nbsp;&nbsp; </span>");
-        likeDislikeButtons.append(likeButton)
+        var likeDislikeButtons = $("<div class='light-padding-top'> Provide Feedback: &nbsp;&nbsp; </div>");
         likeDislikeButtons.append(dislikeButton);
+        likeDislikeButtons.append(likeButton)
 
         info.append('<hr/>');
         info.append(likeDislikeButtons);

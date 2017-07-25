@@ -35,7 +35,7 @@
     background-color: rgba(0, 0, 0, 0.9);
     z-index: 5;
     margin-top: 2em;
-    padding: 40px 30px;
+    padding: 40px 30px 30px 30px;
     color: white;
 }
 
@@ -78,9 +78,18 @@
 
 .clickbait-checker-feedback-button {
     margin-right: 5px !important;
+    float: right;
 }
 
 .clickbait-checker-feedback-button img {
-    height: 17px;
-    width: auto;
+    height: 25px;
+    margin-top: -5px;
+}
+
+.light-margin-top {
+    margin-top: 5px;
+}
+
+.light-padding-top {
+    padding-top: 5px;
 }
