@@ -61,7 +61,7 @@ $(document).ready(function() {
 
         if (isClickbait) {
             clickbaitMarker.addClass('clickbait-marker-is-clickbait');
-            clickbaitMarker.text('Potential Clickbait! - Hover here to read more');
+            clickbaitMarker.text('Potential Clickbait! - Click here to read more');
         } else {
             clickbaitMarker.addClass('clickbait-marker-not-clickbait');
             clickbaitMarker.text('Not Clickbait');
@@ -77,15 +77,15 @@ $(document).ready(function() {
         infoElement.append(closeButton);
 
         closeButton.click(function(e) {
-            infoElement.hide();
+            infoElement.fadeOut('200');
         });
 
         infoElement.hide();
         clickbaitMarkerWrapper.append(infoElement);
         node.before(clickbaitMarkerWrapper);
 
-        clickbaitMarker.hover(function(e) {
-            infoElement.show();
+        clickbaitMarker.click(function(e) {
+            infoElement.fadeIn('200');
         });
     };
 
