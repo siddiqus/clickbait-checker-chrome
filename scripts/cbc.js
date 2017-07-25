@@ -14,6 +14,9 @@ $(document).ready(function() {
     var checked_link_tag_not_clickbait = 'checked_link_tag_not_clickbait';
     var clickbaitCount = 0;
 
+    var facebook_like_icon_class = '_4x9- _4x9_ _48-k font-white clickbait-checker-feedback-button';
+    var facebook_dislike_icon_class = '_4x9- _4x9_ _48-k font-white dislike-button-flipped clickbait-checker-feedback-button';
+
     var dummyData = {
         "data": {
             "decision": "__label__clickbait",
@@ -33,7 +36,15 @@ $(document).ready(function() {
         return 'clickbaitMarkerWrapper_' + count;
     };
 
-    var _getClickbaitInfoElement = function(data, id) {
+    var _handleLikeButtonClick = function(postData) {
+        console.log(postData)
+    };
+
+    var _handleDislikeButtonClick = function(postData) {
+        console.log(postData)
+    };
+
+    var _getClickbaitInfoElement = function(data, id, postData) {
         var element = $("<div class='clickbait-marker-info-wrapper'></div>");
         element.attr('id', _getClickbaitPopupId(id));
 
@@ -46,13 +57,34 @@ $(document).ready(function() {
             '<b>summary:</b><br/>' + data.summary;
 
         var info = $('<div></div>').html(str);
+
+        var likeIcon = $('<span></span>').addClass(facebook_like_icon_class);
+        var dislikeIcon = $('<span></span>').addClass(facebook_dislike_icon_class);
+
+        var likeButton = $('<a></a>').attr('clickbaitId', id);
+        likeButton.html(likeIcon);
+
+        likeButton.click(function(e) {
+            _handleLikeButtonClick(postData);
+        })
+
+        var dislikeButton = $('<a></a>').attr('clickbaitId', id);
+        dislikeButton.html(dislikeIcon);
+
+        dislikeButton.click(function(e) {
+            _handleDislikeButtonClick(postData);
+        })
+
+        var likeDislikeButtons = $("<hr/><span> Provide Feedback: &nbsp;&nbsp;&nbsp; </span>").append(likeButton).append(dislikeButton);
+
+        info.append(likeDislikeButtons);
         element.append(info);
 
         return element;
     }
 
     // Function to append the circle checkmark or cross for a specific node
-    var _handleClickbaitApiSuccess = function(result, node) {
+    var _handleClickbaitApiSuccess = function(result, node, postData) {
         clickbaitCount = clickbaitCount + 1;
 
         var isClickbait = result.decision === '__label__clickbait';
@@ -71,7 +103,7 @@ $(document).ready(function() {
         clickbaitMarkerWrapper.attr('id', _getClickbaitWrapperId(clickbaitCount));
         clickbaitMarkerWrapper.append(clickbaitMarker);
 
-        var infoElement = _getClickbaitInfoElement(result, clickbaitCount);
+        var infoElement = _getClickbaitInfoElement(result, clickbaitCount, postData);
 
         var closeButton = $("<div class='clickbait-marker-info-close-btn'>Close</div>");
         infoElement.append(closeButton);
@@ -91,15 +123,15 @@ $(document).ready(function() {
 
     // Function to prepare API call and handle response
     var _callClickbaitApi = function(title, text, linkUrl, node) {
-        var data = {
+        var postData = {
             title: title,
             text: text,
             url: linkUrl
         };
 
-        $.post(API_URL, data)
+        $.post(API_URL, postData)
             .done(function onSuccess(result) {
-                _handleClickbaitApiSuccess(dummyData.data, node);
+                _handleClickbaitApiSuccess(dummyData.data, node, postData);
             })
             .fail(function onError(xhr, status, error) {
                 console.log(error);

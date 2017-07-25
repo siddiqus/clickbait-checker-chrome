@@ -63,3 +63,25 @@
     border-color: #4caf50;
     color: #4caf50;
 }
+
+.dislike-button-flipped {
+    /* -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipY;
+    -ms-filter: "FlipY"; */
+    -moz-transform: scale(1, -1);
+    -webkit-transform: scale(1, -1);
+    -o-transform: scale(1, -1);
+    -ms-transform: scale(1, -1);
+    transform: scale(1, -1);
+}
+
+.font-white {
+    color: white !important;
+}
+
+.clickbait-checker-feedback-button {
+    margin-right: 5px !important;
+}
