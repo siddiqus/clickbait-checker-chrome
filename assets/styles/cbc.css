@@ -1,3 +1,19 @@
+.clickbait-marker-span {
+    height: 2em;
+    text-align: center;
+    line-height: 2em;
+    color: white !important;
+    margin-top: 0.5em;
+}
+
+.clickbait-marker-is-clickbait {
+    background-color: #f44336;
+}
+
+.clickbait-marker-not-clickbait {
+    background-color: #4caf50;
+}
+
 .clickbait-checker-checked-symbol {
     color: white;
     border: 1px solid;
