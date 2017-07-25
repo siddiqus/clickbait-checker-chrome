@@ -77,7 +77,7 @@ $(document).ready(function() {
         infoElement.append(closeButton);
 
         closeButton.click(function(e) {
-            infoElement.fadeOut('200');
+            infoElement.fadeOut('medium');
         });
 
         infoElement.hide();
@@ -85,7 +85,7 @@ $(document).ready(function() {
         node.before(clickbaitMarkerWrapper);
 
         clickbaitMarker.click(function(e) {
-            infoElement.fadeIn('200');
+            infoElement.fadeIn('medium');
         });
     };
 
@@ -106,6 +106,11 @@ $(document).ready(function() {
             })
     };
 
+    var _getOriginalLinkFromFacebookLink = function(link) {
+        var matchBegin = "php?u=";
+        return link.substring(link.lastIndexOf(matchBegin) + matchBegin.length, link.lastIndexOf("&h="));
+    }
+
     // Function to search Facebook and find all the links
     var loop = function() {
         $(facebook_link_post_container).each(function(obj) {
@@ -117,7 +122,19 @@ $(document).ready(function() {
             // add node checked class
             nodeObj.addClass(checked_link_tag);
 
-            var link = nodeObj.find(facebook_link_post_container_link).attr('href');
+            var linkObj = nodeObj.find(facebook_link_post_container_link);
+            linkObj.mouseenter();
+
+            var link = linkObj.attr('href')
+            if (!link) return;
+
+            try {
+                link = _getOriginalLinkFromFacebookLink(link);
+                link = decodeURIComponent(link);
+            } catch (err) {
+                return;
+            }
+
             if (!link) return;
 
             var text = nodeObj.find(facebook_link_post_container_text).text();
@@ -125,9 +142,10 @@ $(document).ready(function() {
 
             // console.log('-');
             // console.log('--------link found---------');
-            // console.log('link', link);
+            console.log('link', link);
             // console.log('text', text);
             // console.log('title', title);
+            linkObj.mouseleave();
             _callClickbaitApi(title, text, link, nodeObj);
         });
     };
