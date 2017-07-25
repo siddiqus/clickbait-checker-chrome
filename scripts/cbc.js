@@ -136,7 +136,8 @@ $(document).ready(function() {
 
         $.post(API_URL, postData)
             .done(function onSuccess(result) {
-                _handleClickbaitApiSuccess(dummyData.data, node, postData);
+                // result = dummyData;
+                _handleClickbaitApiSuccess(result.data, node, postData);
             })
             .fail(function onError(xhr, status, error) {
                 console.log(error);
